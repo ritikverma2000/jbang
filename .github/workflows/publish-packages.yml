@@ -21,7 +21,7 @@ jobs:
       JRELEASER_GPG_SECRET_KEY: ${{ secrets.GPG_SECRET_KEY }}
       JRELEASER_VERSION: 1.5.1
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: install-java11
@@ -92,7 +92,7 @@ jobs:
         with:
           name: build-choco
           path: build/choco
-      - uses: actions/setup-dotnet@v1
+      - uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '2.2.204' # SDK Version to use.
       - name: choco-build

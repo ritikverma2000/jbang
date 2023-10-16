@@ -20,11 +20,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 2
       - name: Verify Changed files in docs
-        uses: tj-actions/verify-changed-files@v7.1
+        uses: tj-actions/verify-changed-files@v13.1
         id: verify-changed-files
         with:
           files: |
@@ -50,7 +50,7 @@ jobs:
         if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.debug_enabled }}
         with:
           limit-access-to-actor: true
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: gradle/wrapper-validation-action@v1
       - name: install-java8
         uses: actions/setup-java@v3
@@ -86,7 +86,7 @@ jobs:
           name: junit-test-results
           path: '**/build/test-results/test/TEST-*.xml'
           retention-days: 1
-      - uses: codecov/codecov-action@v2
+      - uses: codecov/codecov-action@v3
         with:
           #files: ./coverage1.xml,./coverage2.xml # optional
           flags: ${{ runner.os }} # optional
@@ -94,7 +94,7 @@ jobs:
           verbose: true # optional (default = false)
       - name: build-choco-package
         if: runner.os == 'Windows'
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '2.2.204' # SDK Version to use.
       - name: build-choco
